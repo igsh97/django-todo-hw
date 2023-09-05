@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todo의 index</title>
+</head>
+<body>
+{% if request.user.is_authenticated %}
+    <div>
+        {{ request.user.username }}
+    </div>
+    <form action="/user/signout/" method="post">
+        {% csrf_token %}
+        <button>로그아웃하기</button>
+    </form>
+{% else %}
+    <a href="/user/signin/">로그인</a>
+    <a href="/user/signup/">회원가입</a>
+{% endif %}
+<h1>todo의 index입니다</h1>
+<a href="/todo/create">
+    <button>추가하기</button>
+</a>
+<ul>
+    {% for todo in todos %}
+        <a href="/todo/{{ todo.id }}">
+            <li>
+                <div>
+                    {{ todo.content }}
+                </div>
+            </li>
+        </a>
+    {% endfor %}
+</ul>
+</body>
+</html>

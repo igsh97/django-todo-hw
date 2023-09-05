@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <h1> index </h1>
+    <p>안녕하세요 {name}님!</p>
+    <form action="/receive/" method="POST">
+        {% csrf_token %}
+        <label>
+            <input type="text" name="todo"/>
+            <input type="text" name="todo2"/>
+            <input type="text" name="todo3"/>
+        </label>
+        <button type="submit">제출</button>
+    </form>
+</body>
+</html>
