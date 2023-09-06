@@ -1,36 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>todo의 index</title>
-</head>
-<body>
-{% if request.user.is_authenticated %}
-    <div>
-        {{ request.user.username }}
+{% extends 'base.html' %}
+{% block content %}
+    <div class="p-4">
+    <h1>todo의 index입니다</h1>
+    <a href="/todo/create" class="m-2 flex justify-end">
+        <button class="bg-green-600 p-2 rounded-full text-white">추가하기</button>
+    </a>
+    <ul>
+        {% for todo in todos %}
+            <a href="/todo/{{ todo.id }}">
+                <li class="p-2 border-b">
+                    <div>
+                        {{ todo.content }}
+                    </div>
+                </li>
+            </a>
+        {% endfor %}
+    </ul>
     </div>
-    <form action="/user/signout/" method="post">
-        {% csrf_token %}
-        <button>로그아웃하기</button>
-    </form>
-{% else %}
-    <a href="/user/signin/">로그인</a>
-    <a href="/user/signup/">회원가입</a>
-{% endif %}
-<h1>todo의 index입니다</h1>
-<a href="/todo/create">
-    <button>추가하기</button>
-</a>
-<ul>
-    {% for todo in todos %}
-        <a href="/todo/{{ todo.id }}">
-            <li>
-                <div>
-                    {{ todo.content }}
-                </div>
-            </li>
-        </a>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% endblock %}

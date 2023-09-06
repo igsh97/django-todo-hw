@@ -20,7 +20,11 @@ def index(request):
 def create(request):
     if request.user.is_authenticated:
         if request.method=="POST":
-            Todo.objects.create(content=request.POST["content"],user=request.user)
+            Todo.objects.create(
+                content=request.POST["content"],
+                user=request.user,
+                image=request.FILES.get("image"),
+            )
             return redirect('/todo/')
         elif request.method=="GET":
             return render(request,"todo/create.html")
