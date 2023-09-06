@@ -2,11 +2,17 @@
 {% block content %}
     <body>
     <div>
-        <h1>content : {{ todo.content }}</h1>
+        <h1>제목 : {{ todo.title }}</h1>
+        <p>내용 : {{ todo.content }}</p>
         <img src="/media/{{ todo.image }}">
         <p>생성시각 : {{ todo.created_at }}</p>
         <p>수정시각 : {{ todo.updated_at }}</p>
         <p>작성자 : {{ todo.user.username }}</p>
+        {% if todo.is_done == False %}
+            <p>상태 : 미완료</p>
+        {% else %}
+            <p>상태 : 완료</p>
+        {% endif %}
         {% if request.user == todo.user %}
             <div>
                 <form action="/todo/delete/{{ todo.id }}/" method="post">

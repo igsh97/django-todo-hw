@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="p-4">
-    <h1>todo의 index입니다</h1>
+    <h1>{{ user.username }}의 페이지입니다</h1>
+    <div>
+        <p>프로필 : {{ user.profile }}</p>
+        <img src="/media/{{ user.profile_image }}">
+    </div>
     <a href="/todo/create" class="m-2 flex justify-end">
         <button class="bg-green-600 p-2 rounded-full text-white">추가하기</button>
     </a>
     <ul>
-        {% for todo in todos %}
-            <a href="/todo/{{ todo.id }}">
+        {% for my_todo in my_todos %}
+            <a href="/todo/{{ my_todo.id }}">
                 <li class="p-2 border-b">
                     <div>
-                        <h1>{{ todo.title }}</h1>
-                        {% if todo.is_done == False %}
+                        <h1>{{ my_todo.title }}</h1>
+                        {% if my_todo.is_done == False %}
                             <p>미완료</p>
                         {% else %}
                             <p>완료</p>

@@ -21,6 +21,7 @@ def create(request):
     if request.user.is_authenticated:
         if request.method=="POST":
             Todo.objects.create(
+                title=request.POST["title"],
                 content=request.POST["content"],
                 user=request.user,
                 image=request.FILES.get("image"),
@@ -57,7 +58,9 @@ def update(request, todo_id):
         todo = Todo.objects.get(id=todo_id)
         if request.user != todo.user:
             return HttpResponse("You are not allowed to delete this todo", status=403)
+        todo.title = request.POST["title"]
         todo.content = request.POST["content"]
+        todo.is_done = request.POST["is_done"]
         todo.save()
         return redirect(f'/todo/')
     elif request.method == "GET":

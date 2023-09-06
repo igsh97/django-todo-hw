@@ -7,4 +7,5 @@ urlpatterns = [
     path('signin/',views.signin),
     path('whoami/',views.whoami),
     path('signout/',views.signout),
+    path('mypage/<int:id>/',views.mypage),
 ]
