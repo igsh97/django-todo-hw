@@ -10,10 +10,17 @@
     {% csrf_token %}
     <input type="text" name="title" id="title" value="{{ todo.title }}">
     <input type="text" name="content" id="content" value="{{ todo.content }}">
-    <input type="checkbox" name="is_done" id="is_done" value="True">
-    <label>완료</label>
-    <input type="checkbox" name="is_done" id="is_done" value="False">
-    <label>미완료</label>
+    {% if todo.is_done == True%}
+        <input type="radio" name="is_done" id="is_done" value="True" checked="checked">
+        <label>완료</label>
+        <input type="radio" name="is_done" id="is_done" value="False">
+        <label>미완료</label>
+    {% else %}
+        <input type="radio" name="is_done" id="is_done" value="True">
+        <label>완료</label>
+        <input type="radio" name="is_done" id="is_done" value="False" checked="checked">
+        <label>미완료</label>
+    {% endif %}
     <button type="submit">수정하기</button>
 </form>
 </body>
